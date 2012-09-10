@@ -310,7 +310,7 @@ didReceiveResponse:(NSURLResponse *)response
     long long fileOffset = 0;
     if ([self.response statusCode] != 206) {
         if ([self.outputStream propertyForKey:NSStreamFileCurrentOffsetKey]) {
-            [self.outputStream setProperty:[NSNumber numberWithInteger:0] forKey:NSStreamFileCurrentOffsetKey];
+            [self.outputStream setProperty:@0 forKey:NSStreamFileCurrentOffsetKey];
         } else {
             if ([[self.outputStream propertyForKey:NSStreamDataWrittenToMemoryStreamKey] length] > 0) {
                 self.outputStream = [NSOutputStream outputStreamToMemory];
@@ -321,8 +321,8 @@ didReceiveResponse:(NSURLResponse *)response
         if ([contentRange hasPrefix:@"bytes"]) {
             NSArray *bytes = [contentRange componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" -/"]];
             if ([bytes count] == 4) {
-                fileOffset = [[bytes objectAtIndex:1] longLongValue];
-                totalContentLength = [[bytes objectAtIndex:2] longLongValue] ?: -1; // if this is *, it's converted to 0, but -1 is default.
+                fileOffset = [bytes[1] longLongValue];
+                totalContentLength = [bytes[2] longLongValue] ?: -1; // if this is *, it's converted to 0, but -1 is default.
             }
         }
 
