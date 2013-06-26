@@ -253,8 +253,7 @@ NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
 
     
     [self setDefaultHeader:@"User-Agent" value:[NSString stringWithFormat:@"Ricebook/%@",  (__bridge id)CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), kCFBundleVersionKey) ?: [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey]]];
-    [self setDefaultHeader:@"App-Version" value:  (__bridge id)CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), kCFBundleVersionKey) ?: [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey]];
-
+  
 #ifdef _SYSTEMCONFIGURATION_H
     self.networkReachabilityStatus = AFNetworkReachabilityStatusUnknown;
     [self startMonitoringNetworkReachability];
